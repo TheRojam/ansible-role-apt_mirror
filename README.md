@@ -1,7 +1,7 @@
 Role Name
 =========
 
-**godleon.docker**
+**godleon.apt_mirror**
 
 Requirements
 ------------
@@ -48,7 +48,7 @@ Including an example of how to use your role (for instance, with variables passe
 ```yml
 - hosts: servers
   roles:
-  - { role: godleon.apt-mirror }
+  - { role: godleon.apt_mirror }
 ```
 
 License
