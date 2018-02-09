@@ -1,0 +1,14 @@
+---
+
+
+- debug:
+    msg: "Hello, I am in role apt-mirror"
+
+- debug:
+    var: apt_mirror
+
+- include_tasks: "ubuntu.yml"
+  when: apt_mirror.ubuntu.enabled
+
+- include_tasks: "debian.yml"
+  when: apt_mirror.debian.enabled

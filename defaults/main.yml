@@ -1,0 +1,16 @@
+---
+# defaults file for ansible-role-vlans_on_trunk
+
+apt_mirror:
+  dir: "/var/local-repo"
+  ubuntu:
+    enabled: true
+    source: "http://archive.ubuntu.com/ubuntu"
+    nthreads: 2
+    support_versions:
+      - name: trusty
+        mirror_source: false
+      - name: xenial
+        mirror_source: false
+  debian:
+    enabled: false
