@@ -4,11 +4,22 @@
 - debug:
     msg: "Hello, I am in role apt-mirror"
 
-- debug:
-    var: apt_mirror
+- name: "Create a folder to keep apt-mirror logs"
+  file:
+    path: "{{ apt_mirror.log_dir }}"
+    state: directory
+    mode: 0755
 
 - include_tasks: "ubuntu.yml"
   when: apt_mirror.ubuntu.enabled
 
 - include_tasks: "debian.yml"
   when: apt_mirror.debian.enabled
+
+
+- name: "Copy script for daily synchronizing APT package repository"
+  template:
+    src: "templates/local-apt-mirror.sh"
+    dest: "/etc/cron.daily/local-apt-mirror"
+    mode: 0755
+  

@@ -1,9 +1,5 @@
 ---
 
-- debug:
-    msg: "Hello, I am in ubuntu"
-
-
 - name: "Create a folder to keep APT packages"
   file:
     path: "{{ apt_mirror.dir }}/ubuntu"
@@ -23,17 +19,11 @@
     src: "templates/ubuntu.mirror.list"
     dest: "/etc/apt/mirror.list"
 
-- name: "Start APT mirror process"
-  at:
-    command: "apt-mirror > /dev/null"
-    count: 1
-    units: minutes
+# - name: "Start APT mirror process"
+#   at:
+#     command: "apt-mirror > /tmp/apt-mirror.log"
+#     count: 1
+#     units: minutes
 
-- debug:
-    msg: "APT mirror process will start after 1 minute."
-
-# - name: "Install necessary packages for configuring an Ubuntu APT mirror"
-#   apt:
-#     name: 'apt-mirror'
-#     state: 'latest'
-#     update_cache: 'yes'
+# - debug:
+#     msg: "APT mirror process will start after 1 minute."

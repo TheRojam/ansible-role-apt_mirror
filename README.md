@@ -19,18 +19,20 @@ The variables that should be passed to this role and a brief description about t
 apt_mirror:
   # where you are going to keep APT packages & metadata
   dir: "/var/local-repo"
+  # where you are going to keep mirror logs
+  log_dir: "/tmp/apt-mirror-logs"
   ubuntu:
     enabled: true
     # APT package source
     source: "http://archive.ubuntu.com/ubuntu"
-    nthreads: 2
+    nthreads: 10
     # Versions are needed to be synchronized to the local APT mirror
     support_versions:
       - name: trusty
         # set to "true" if you need source code packages
-        mirror_source: false
+        mirror_source: true
       - name: xenial
-        mirror_source: false
+        mirror_source: true
   debian:
     enabled: false
 ```
@@ -62,3 +64,11 @@ Author Information
 **Leon Tseng** 
 
 -  [godleon@GitHub](https://github.com/godleon)
+
+
+References
+==========
+
+- [Set Up A Local Ubuntu Mirror with Apt-Mirror | Programster's Blog](https://blog.programster.org/set-up-a-local-ubuntu-mirror-with-apt-mirror)
+
+- [IT專題-Ubuntu的資源平台自己建 (APT Server) @ IT001 :: 痞客邦 PIXNET ::](http://it001.pixnet.net/blog/post/324622288)

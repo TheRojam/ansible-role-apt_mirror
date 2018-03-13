@@ -1,17 +1,25 @@
 ############# config ##################
 #
 set base_path    {{ apt_mirror.dir }}/ubuntu
+set defaultarch  amd64
 set nthreads     {{ apt_mirror.ubuntu.nthreads }}
 set _tilde 0
 #
 ############# end config ##############
 
 {% for item in apt_mirror.ubuntu.support_versions %}
-deb {{ apt_mirror.ubuntu.source }} {{ item.name }} main restricted universe multiverse
-deb {{ apt_mirror.ubuntu.source }} {{ item.name }}-security main restricted universe multiverse
-deb {{ apt_mirror.ubuntu.source }} {{ item.name }}-updates main restricted universe multiverse
-deb {{ apt_mirror.ubuntu.source }} {{ item.name }}-proposed main restricted universe multiverse
-deb {{ apt_mirror.ubuntu.source }} {{ item.name }}-backports main restricted universe multiverse
+deb-amd64 {{ apt_mirror.ubuntu.source }} {{ item.name }} main main/debian-installer restricted restricted/debian-installer universe multiverse
+deb-amd64 {{ apt_mirror.ubuntu.source }} {{ item.name }}-security main restricted universe multiverse
+deb-amd64 {{ apt_mirror.ubuntu.source }} {{ item.name }}-updates main restricted universe multiverse
+deb-amd64 {{ apt_mirror.ubuntu.source }} {{ item.name }}-proposed main restricted universe multiverse
+deb-amd64 {{ apt_mirror.ubuntu.source }} {{ item.name }}-backports main restricted universe multiverse
+
+deb-i386 {{ apt_mirror.ubuntu.source }} {{ item.name }} main main/debian-installer restricted restricted/debian-installer universe multiverse
+deb-i386 {{ apt_mirror.ubuntu.source }} {{ item.name }}-security main restricted universe multiverse
+deb-i386 {{ apt_mirror.ubuntu.source }} {{ item.name }}-updates main restricted universe multiverse
+deb-i386 {{ apt_mirror.ubuntu.source }} {{ item.name }}-proposed main restricted universe multiverse
+deb-i386 {{ apt_mirror.ubuntu.source }} {{ item.name }}-backports main restricted universe multiverse
+
 {% if item.mirror_source %}
 deb-src {{ apt_mirror.ubuntu.source }} {{ item.name }} main restricted universe multiverse
 deb-src {{ apt_mirror.ubuntu.source }} {{ item.name }}-security main restricted universe multiverse
@@ -20,6 +28,12 @@ deb-src {{ apt_mirror.ubuntu.source }} {{ item.name }}-proposed main restricted 
 deb-src {{ apt_mirror.ubuntu.source }} {{ item.name }}-backports main restricted universe multiverse
 {% endif %}
 
+# Nginx
+deb http://nginx.org/packages/mainline/ubuntu {{ item.name }} nginx
+deb-src http://nginx.org/packages/mainline/ubuntu {{ item.name }} nginx
+
 {% endfor %}
 
+# clean
 clean {{ apt_mirror.ubuntu.source }}
+clean http://nginx.org/packages/mainline/ubuntu
